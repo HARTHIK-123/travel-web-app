@@ -12,7 +12,10 @@ const PORT = 3000;
 
 // Middleware
 app.use(express.json());
-app.use(cors());
+app.use(cors({
+    origin: '*', // Allow all origins
+}));
+
 
 // Database connection
 mongoose.connect(process.env.DB_URL)
