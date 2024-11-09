@@ -9,9 +9,10 @@ const Community = () => {
 
   const colors = ['#FFDDC1', '#FFABAB', '#FFC3A0', '#FF677D', '#D9BF77', '#A8D8EA', '#A3DFF7', '#FFE156'];
 
+  const backendURL = import.meta.env.VITE_BACKEND_URL;
   useEffect(() => {
     // Fetch stories from backend
-    axios.get('http://localhost:3000/api/stories')
+    axios.get(`${backendURL}/api/stories`)
       .then(response => setStories(response.data))
       .catch(error => console.error('Error fetching stories:', error));
   }, []);
@@ -19,7 +20,7 @@ const Community = () => {
   const handleSearchChange = (e) => setSearchTerm(e.target.value);
 
   const handleLike = (id) => {
-    axios.patch(`http://localhost:3000/api/stories/${id}/like`)
+    axios.patch(`${backendURL}/api/stories/${id}/like`)
       .then(response => {
         setStories(stories.map(story => story.id === id ? response.data : story));
       })
@@ -27,7 +28,7 @@ const Community = () => {
   };
 
   const handleCommentSubmit = (id, comment) => {
-    axios.post(`http://localhost:3000/api/stories/${id}/comment`, { text: comment })
+    axios.post(`${backendURL}/api/stories/${id}/comment`, { text: comment })
       .then(response => {
         setStories(stories.map(story => story.id === id ? response.data : story));
       })
@@ -37,7 +38,7 @@ const Community = () => {
   const handleNewStorySubmit = (e) => {
     e.preventDefault();
     if (newStory.trim()) {
-      axios.post('http://localhost:3000/api/stories', { user: 'You', text: newStory })
+      axios.post(`${backendURL}/api/stories`, { user: 'You', text: newStory })
         .then(response => {
           setStories([response.data, ...stories]);
           setNewStory('');

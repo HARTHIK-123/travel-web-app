@@ -3,15 +3,18 @@ import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import './Access.css';
 
+
 const Access = ({ setIsAuthenticated }) => {
     const [isLogin, setIsLogin] = useState(true);
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const navigate = useNavigate();
 
+    const backendURL = import.meta.env.VITE_BACKEND_URL;
+
     const handleSubmit = async (e) => {
         e.preventDefault();
-        const endpoint = isLogin ? 'http://localhost:3000/api/auth/login' : 'http://localhost:3000/api/auth/signup';
+        const endpoint = isLogin ? `${backendURL}/api/auth/login` : `${backendURL}/api/auth/signup`;
 
         try {
             const response = await axios.post(endpoint, { email, password });
