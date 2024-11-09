@@ -13,8 +13,11 @@ const PORT = 3000;
 // Middleware
 app.use(express.json());
 app.use(cors({
-    origin: '*', // Allow all origins
+    origin: 'https://travel-web-app-navy.vercel.app', // Allow only this specific origin
+    methods: ['GET', 'POST', 'PUT', 'DELETE'], // Specify allowed methods as needed
+    credentials: true // Enable if you're handling cookies or sessions
 }));
+
 
 
 // Database connection
