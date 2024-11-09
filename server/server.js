@@ -13,12 +13,10 @@ const PORT = 3000;
 // Middleware
 app.use(express.json());
 app.use(cors({
-    origin: 'https://travel-web-app-navy.vercel.app', // Allow only this specific origin
+    origin: 'https://travel-web-app-8q6t.onrender.com', // Allow only this specific origin
     methods: ['GET', 'POST', 'PUT', 'DELETE'], // Specify allowed methods as needed
     credentials: true // Enable if you're handling cookies or sessions
 }));
-
-
 
 // Database connection
 mongoose.connect(process.env.DB_URL)
